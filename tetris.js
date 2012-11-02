@@ -65,7 +65,9 @@ var tetris = {
 			this.initLevelScores();
 			this.initShapes();
 			this.bindKeyEvents();
+           this.bindControlEvents();
 			this.play();
+            
 		},
 		initBoard:function() {
 			this.boardHeight = this.canvasHeight/this.pSize;
@@ -201,6 +203,52 @@ var tetris = {
 				document.attachEvent('on' + event,cb);
 			}
 		},
+        bindControlEvents:function() {
+            var me = this;
+            var    event = "click";
+            var    cb = function(e) {
+                    me.handleControl(e);
+                };
+            var    controls = document.getElementById("controls");
+            this.controls = controls;
+            if (window.addEventListener) {
+                this.controls.addEventListener(event, cb, false);
+            } else {
+               // this.controls.attachEvent('on' + event,cb);
+            } 
+        },
+        handleControl:function(e) {
+           /* var classes = e.target.className.split(" "),
+                cls_length = classes.length,
+                dir = '';
+            this.log(classes);
+            while(cls_length--){
+                class_name = classes[cls_length];
+                switch (class_name) {
+                    case "move_left":
+                        this.move('L');
+                        break;
+                    case "move_rotate": // rotate
+                        this.move('RT');
+                        break;
+                    case "move_right":
+                        this.move('R');
+                        break;
+                    case "move_down":
+                        this.move('D');
+                        break;
+                    case "move_pause": //esc:pause
+                        this.togglePause();
+                        break;
+                    case "move_show_controls": //esc:pause
+                        this.log("move_show_controls");
+                        this.toggleControls();
+                        break;
+                    default:
+                        break;
+                }
+            }     */ 
+        },
 		handleKey:function(e) {
 			var c = this.whichKey(e);
 			var dir = '';
